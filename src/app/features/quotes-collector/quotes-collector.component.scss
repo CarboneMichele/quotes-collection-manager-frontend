@@ -1,0 +1,28 @@
+@import '../../../assets/scss/colors';
+
+.qcm-page {
+    background-color: $brand-02;
+
+    &__title {
+        text-align: center;
+        margin-top: 30px;
+    }
+    &__quotesList {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        width: 100%;
+        max-width: 1200px;
+        padding: 186px 30px 100px 30px;
+        margin: 0 auto;
+        gap: 20px;
+    }
+}
+
+@media screen and (min-width: 600px) {
+    .qcm-page {
+        &__quotesList {
+            padding-top: 112px;
+        }
+    }
+}

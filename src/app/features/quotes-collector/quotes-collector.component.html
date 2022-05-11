@@ -1,0 +1,12 @@
+<div class="qcm-page">
+    <div class="qcm-page__content">
+        <qcm-quote-creator (quoteCreated)="storeNewQuote($event)"></qcm-quote-creator>
+        <qcm-toolbar (textSearched)="updateSearchText($event)"></qcm-toolbar>
+        <div class="qcm-page__emptyQuoteSection" *ngIf="quotes && !quotes.length">
+            <p class="qcm-page_emptyQutoesSection__message">There are no quotes to show</p>
+        </div>
+        <div class="qcm-page__quotesList" *ngIf="quotes && quotes.length">
+            <qcm-quote [quote]="quote" *ngFor="let quote of quotes"></qcm-quote>
+        </div>
+    </div>
+</div>

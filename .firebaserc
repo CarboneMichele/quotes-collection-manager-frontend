@@ -1,0 +1,14 @@
+{
+    "targets": {
+        "quotes-collection-manager": {
+            "hosting": {
+                "quotes-collection-manager-frontend": [
+                    "quotes-collection-manager"
+                ]
+            }
+        }
+    },
+    "projects": {
+        "default": "quotes-collection-manager"
+    }
+}

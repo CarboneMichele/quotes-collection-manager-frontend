@@ -1,0 +1,58 @@
+<div class="qcm-quoteCreator" [ngClass]="{ '-show': showQuoteCreator }">
+    <div class="qcm-quoteCreator__content">
+        <h5 class="qcm-quoteCreator__title">Add a new quote</h5>
+        <form class="qcm-quoteCreator__form" [formGroup]="quoteCreationForm">
+            <mat-form-field appearance="outline" color="primary">
+                <mat-label>Quote</mat-label>
+                <textarea
+                    matInput
+                    cdkTextareaAutosize
+                    cdkAutosizeMinRows="1"
+                    cdkAutosizeMaxRows="6"
+                    placeholder="Type or paste a quote"
+                    formControlName="quote"
+                ></textarea>
+                <mat-error *ngIf="quoteControl?.hasError('required')">This field is required</mat-error>
+                <mat-error *ngIf="quoteControl?.hasError('maxlength')"
+                    >You have exceeded {{ constants.QUOTE_MAX_LENGTH }} characters</mat-error
+                >
+                <mat-error *ngIf="quoteControl?.hasError('whitespace') && !quoteControl?.hasError('required')"
+                    >No empty quotes allowed</mat-error
+                >
+                <mat-error *ngIf="quoteControl?.hasError('duplicates') && !quoteControl?.hasError('required')"
+                    >You already saved this quote</mat-error
+                >
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" color="primary">
+                <mat-label>Author</mat-label>
+                <input matInput autofocus placeholder="Insert author's name" formControlName="author" />
+                <mat-error *ngIf="authorControl?.hasError('maxlength')"
+                    >You have exceeded {{ constants.AUTHOR_MAX_LENGTH }} characters</mat-error
+                >
+            </mat-form-field>
+
+            <div class="qcm-quoteCreator__actions">
+                <button
+                    class="qcm-quoteCreator__action -submit"
+                    type="submit"
+                    mat-raised-button
+                    color="primary"
+                    [disabled]="quoteCreationForm.invalid"
+                    (click)="onSubmit()"
+                >
+                    ADD NEW QUOTE
+                </button>
+                <button
+                    class="qcm-quoteCreator__action -back"
+                    type="button"
+                    mat-raised-button
+                    color="accent"
+                    (click)="hideQuoteCreatorForm(true)"
+                >
+                    INDIETRO
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

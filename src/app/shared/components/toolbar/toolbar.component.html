@@ -1,0 +1,20 @@
+b
+<div class="qcm-toolbar">
+    <div class="qcm-toolbar__content">
+        <mat-form-field appearance="outline" color="primary" class="qcm-toolbar__action -search">
+            <mat-label>Search quote</mat-label>
+            <input
+                matInput
+                autofocus
+                placeholder="Start typing to start the search
+                "
+                [(ngModel)]="searchText"
+                (ngModelChange)="emitQuoteCreationEvent()"
+            />
+        </mat-form-field>
+        <p>or</p>
+        <button class="qcm-toolbar__action -openCreatorbtn" mat-raised-button color="primary" (click)="showQuoteCreatorForm()">
+            Add a new quote
+        </button>
+    </div>
+</div>

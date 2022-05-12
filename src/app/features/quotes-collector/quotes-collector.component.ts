@@ -1,3 +1,4 @@
+import { ClipboardService } from './../../core/services/clipboard.service';
 import { UtilsService } from './../../core/services/utils.service';
 import { Subscription } from 'rxjs';
 import { Component, OnDestroy, OnInit } from '@angular/core';
@@ -23,15 +24,18 @@ export class QuotesCollectorComponent implements OnInit, OnDestroy {
     //
 
     public quotesListSubscription!: Subscription;
+    public clipboardCopySubscription!: Subscription;
 
     constructor(
         private quotesService: QuotesService,
         private notificationsService: NotificationsService,
-        private utilsService: UtilsService
+        private utilsService: UtilsService,
+        private clipboardService: ClipboardService
     ) {}
 
     ngOnInit(): void {
         this.subscribeToQuoteListSource();
+        this.subscribeToClipboardCopySource();
         this.getQuotes();
         this.getRandomQuote();
     }
@@ -43,6 +47,14 @@ export class QuotesCollectorComponent implements OnInit, OnDestroy {
     subscribeToQuoteListSource(): void {
         this.quotesListSubscription = this.quotesService.updatedQuotesListSource$.subscribe((quotes: Quote[]) => {
             this.quotes = quotes;
+        });
+    }
+
+    subscribeToClipboardCopySource(): void {
+        this.clipboardCopySubscription = this.clipboardService.updatedCopiedToClipboardSource$.subscribe((copied: boolean) => {
+            if (copied) {
+                this.notificationsService.openSnackBar('Copied to clipboard', undefined, false);
+            }
         });
     }
 

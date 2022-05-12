@@ -2,7 +2,7 @@
     <mat-icon class="qcm-quote__icon"> format_quote</mat-icon>
     <p class="qcm-quote__content" [qcm-highlight]="searchTerms" [innerText]="quote.content"></p>
     <p class="qcm-quote__author" [qcm-highlight]="searchTerms" [innerText]="quote.author ? '- ' + quote.author : '- Anonymous'"></p>
-    <button mat-icon-button class="qcm-quote__action">
+    <button mat-icon-button class="qcm-quote__action" (click)="copyToClipboard()">
         <mat-icon>content_copy</mat-icon>
     </button>
 </div>

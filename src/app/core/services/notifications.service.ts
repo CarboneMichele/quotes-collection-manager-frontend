@@ -10,6 +10,7 @@ export class NotificationsService {
     openSnackBar(message: string, action: string = 'Close', isError: boolean): void {
         const panelClass = isError ? 'error-snackbar' : 'success-snackbar';
         this.snackBar.open(message, action, {
+            duration: 3000,
             panelClass: panelClass,
         });
     }

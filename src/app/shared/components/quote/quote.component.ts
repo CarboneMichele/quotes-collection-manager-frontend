@@ -9,5 +9,6 @@ import { Quote } from '../../models/quotes.model';
 })
 export class QuoteComponent {
     @Input() quote!: Quote;
+    @Input() searchTerms!: string[];
     constructor(private clipboardService: ClipboardService) {}
 }

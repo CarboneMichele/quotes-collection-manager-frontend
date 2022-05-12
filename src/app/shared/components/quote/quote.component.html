@@ -1,6 +1,7 @@
 <div class="qcm-quote">
-    <p class="qcm-quote__content"><mat-icon class="qcm-quote__icon"> format_quote</mat-icon>{{ quote.content }}</p>
-    <p class="qcm-quote__author">- {{ quote.author ? quote.author : 'Anonymous' }}</p>
+    <mat-icon class="qcm-quote__icon"> format_quote</mat-icon>
+    <p class="qcm-quote__content" [qcm-highlight]="searchTerms" [innerText]="quote.content"></p>
+    <p class="qcm-quote__author" [qcm-highlight]="searchTerms" [innerText]="quote.author ? '- ' + quote.author : '- Anonymous'"></p>
     <button mat-icon-button class="qcm-quote__action">
         <mat-icon>content_copy</mat-icon>
     </button>

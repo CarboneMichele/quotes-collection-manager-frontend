@@ -7,11 +7,12 @@ import { MaterialModule } from '../misc/material/material.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { QuoteComponent } from './components/quote/quote.component';
 import { ToolbarComponent } from './components/toolbar/toolbar.component';
-import { FilterByKeywordsPipe } from './pipes/filter-by-keywords.pipe';
+import { FilterQuotesByKeywordsPipe } from './pipes/filter-quotes-by-keywords.pipe';
+import { HighlightDirective } from './directives/highlight.directive';
 
 @NgModule({
-    declarations: [QuoteCreatorComponent, QuoteComponent, ToolbarComponent, FilterByKeywordsPipe],
+    declarations: [QuoteCreatorComponent, QuoteComponent, ToolbarComponent, FilterQuotesByKeywordsPipe, HighlightDirective],
     imports: [CommonModule, MaterialModule, FormsModule, ReactiveFormsModule],
-    exports: [QuoteCreatorComponent, QuoteComponent, MaterialModule, ToolbarComponent],
+    exports: [QuoteCreatorComponent, QuoteComponent, MaterialModule, ToolbarComponent, FilterQuotesByKeywordsPipe, HighlightDirective],
 })
 export class SharedModule {}

@@ -6,7 +6,11 @@
             <p class="qcm-page_emptyQutoesSection__message">There are no quotes to show</p>
         </div>
         <div class="qcm-page__quotesList" *ngIf="quotes && quotes.length">
-            <qcm-quote [quote]="quote" *ngFor="let quote of quotes"></qcm-quote>
+            <qcm-quote
+                [quote]="quote"
+                [searchTerms]="searchText"
+                *ngFor="let quote of quotes | filterQuotesByKeywords: searchText"
+            ></qcm-quote>
         </div>
     </div>
 </div>

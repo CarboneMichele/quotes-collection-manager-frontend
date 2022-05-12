@@ -19,7 +19,6 @@ export class UtilsService {
             str
                 .toLowerCase()
                 .trim()
-                .replace(/ +(?= )/g, '')
                 .replace(/[^a-z0-9 ]/gi, '')
                 .split(' ')
                 .filter((searchStr: string) => {

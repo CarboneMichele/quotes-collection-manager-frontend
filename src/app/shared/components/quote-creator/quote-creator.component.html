@@ -26,7 +26,7 @@
 
             <mat-form-field appearance="outline" color="primary">
                 <mat-label>Author</mat-label>
-                <input matInput autofocus placeholder="Insert author's name" formControlName="author" />
+                <input matInput placeholder="Insert author's name" formControlName="author" />
                 <mat-error *ngIf="authorControl?.hasError('maxlength')"
                     >You have exceeded {{ constants.AUTHOR_MAX_LENGTH }} characters</mat-error
                 >
@@ -41,7 +41,7 @@
                     [disabled]="quoteCreationForm.invalid"
                     (click)="onSubmit()"
                 >
-                    ADD NEW QUOTE
+                    SUBMIT QUOTE
                 </button>
                 <button
                     class="qcm-quoteCreator__action -back"

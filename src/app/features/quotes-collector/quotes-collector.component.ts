@@ -98,7 +98,6 @@ export class QuotesCollectorComponent implements OnInit, OnDestroy {
 
     updateSearchText(searchText: string): void {
         this.searchText = this.utilsService.getArrayOfOnlyAlphanumericStrings(searchText);
-        console.log(this.searchText);
     }
 
     //

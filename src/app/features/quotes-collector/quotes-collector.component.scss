@@ -1,6 +1,7 @@
-@import '../../../assets/scss/colors';
+@import "../../../assets/scss/colors";
 
 .qcm-page {
+    min-height: 100vh;
     background-color: $brand-02;
 
     &__title {
@@ -20,7 +21,9 @@
 }
 
 @media screen and (min-width: 600px) {
+
     .qcm-page {
+
         &__quotesList {
             padding-top: 112px;
         }

@@ -1,8 +1,9 @@
 @import "../../../assets/scss/colors";
+@import "../../../assets/scss/mixins";
 
 .qcm-page {
+    @include bg-gradient-main;
     min-height: 100vh;
-    background-color: $brand-02;
 
     &__title {
         text-align: center;

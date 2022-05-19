@@ -7,7 +7,7 @@ import { NotificationsService } from './../../core/services/notifications.servic
 import { QuotesService } from './../../core/services/quotes.service';
 
 import { QuoteParams } from './../../shared/models/quotes.model';
-import { Quote, RandomQuote } from 'src/app/shared/models/quotes.model';
+import { Quote, SuggestedQuote } from 'src/app/shared/models/quotes.model';
 
 @Component({
     selector: 'qcm-quotes-collector',
@@ -16,7 +16,7 @@ import { Quote, RandomQuote } from 'src/app/shared/models/quotes.model';
 })
 export class QuotesCollectorComponent implements OnInit, OnDestroy {
     public quotes!: Quote[];
-    public randomQuote!: RandomQuote;
+    public suggestedQuote!: SuggestedQuote;
     public searchText: string[] = [];
 
     //
@@ -37,7 +37,7 @@ export class QuotesCollectorComponent implements OnInit, OnDestroy {
         this.subscribeToQuoteListSource();
         this.subscribeToClipboardCopySource();
         this.getQuotes();
-        this.getRandomQuote();
+        this.getSuggestedQuote();
     }
 
     //
@@ -75,6 +75,9 @@ export class QuotesCollectorComponent implements OnInit, OnDestroy {
 
     storeNewQuote(params: QuoteParams): void {
         this.quotesService.createNewQuote(params).subscribe({
+            next: () => {
+                this.notificationsService.openSnackBar('New quote added successfully', undefined, false);
+            },
             error: () => {
                 this.notificationsService.openSnackBar('An error occurred while storing the new quote', undefined, true);
             },
@@ -93,10 +96,10 @@ export class QuotesCollectorComponent implements OnInit, OnDestroy {
     // ─── RANDOM QUOTE METHODS ───────────────────────────────────────────────────────
     //
 
-    getRandomQuote(): void {
-        this.quotesService.getRandomQuote().subscribe({
-            next: (randomQuote: RandomQuote) => {
-                this.randomQuote = randomQuote;
+    getSuggestedQuote(): void {
+        this.quotesService.getSuggestedQuote().subscribe({
+            next: (suggestedQuote: SuggestedQuote) => {
+                this.suggestedQuote = suggestedQuote;
             },
             error: (err: any) => {
                 this.notificationsService.openSnackBar('An error occurred while fetching the suggested quote', undefined, true);

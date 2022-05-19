@@ -1,0 +1,78 @@
+@import "../../../../assets/scss/mixins";
+@import "../../../../assets/scss/colors";
+
+
+:host {
+    width: 100%;
+}
+.qcm-suggestedQuote {
+    @include bottom-box-shadow;
+    @include bg-suggested-quote;
+    width: 100%;
+    border-radius: 0 0 3px 3px;
+    transform: translateY(-100%);
+    animation: open 0.1s cubic-bezier(.36,.07,.19,.97) both;
+    padding: 24px 24px 0 24px;
+    position: fixed;
+    top: 167px;
+    left: 0;
+    z-index: 8;
+    animation-delay: 1s;
+
+    &__body {
+        max-width: 1030px;
+        margin: 0 auto;
+        position: relative;
+    }
+    &__author {
+        display: block;
+        font-style: italic;
+        opacity: 0.6;
+        margin-top: 20px;
+        margin-bottom: 0
+    }
+    &__content {
+        @include hyphenize;
+        text-align: center;
+        word-wrap: break-word;
+        padding-bottom: 16px;
+        margin-top: 14px;
+        hyphens: auto;
+    }
+    &__actionsWrap {
+        display: flex;
+        flex-wrap: nowrap;
+        align-items: center;
+        gap: 6px;
+        position: absolute;
+        bottom: 8px;
+        right: -2px;
+    }
+    &.-hidden {
+        transform: translateY(0%);
+        animation: close 0.3s cubic-bezier(.36,.07,.19,.97) both;
+        animation-delay: 0;
+    }
+}
+
+@media screen and (min-width: 600px) {
+
+    .qcm-suggestedQuote {
+        top: 90px;
+    }
+}
+
+
+@keyframes open {
+
+    100% {
+        transform: translateY(0);
+    }
+}
+
+@keyframes close {
+
+    100% {
+        transform: translateY(-100%);
+    }
+}

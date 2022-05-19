@@ -1,5 +1,5 @@
-@import '../../../../assets/scss/colors';
-@import '../../../../assets/scss/mixins';
+@import "../../../../assets/scss/colors";
+@import "../../../../assets/scss/mixins";
 
 :host {
     width: 100%;
@@ -42,7 +42,9 @@
 }
 
 @media screen and (min-width: 750px) {
+
     :host {
         max-width: 330px;
     }
 }
+

@@ -5,7 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { addDoc, collection, collectionData, DocumentData, Firestore } from '@angular/fire/firestore';
 
 import { Quote, QuoteParams } from './../../shared/models/quotes.model';
-import { RandomQuote } from 'src/app/shared/models/quotes.model';
+import { SuggestedQuote } from 'src/app/shared/models/quotes.model';
 
 @Injectable({
     providedIn: 'root',
@@ -29,9 +29,9 @@ export class QuotesService {
         return collectionData(this.firestoreQuotesCollection, { idField: 'id' }) as Observable<Quote[]>;
     }
 
-    getRandomQuote(): Observable<RandomQuote> {
-        return this.httpClient.get<RandomQuote[]>('https://type.fit/api/quotes').pipe(
-            map((quotes: RandomQuote[]) => {
+    getSuggestedQuote(): Observable<SuggestedQuote> {
+        return this.httpClient.get<SuggestedQuote[]>('https://type.fit/api/quotes').pipe(
+            map((quotes: SuggestedQuote[]) => {
                 return quotes[Math.floor(Math.random() * quotes.length)];
             })
         );

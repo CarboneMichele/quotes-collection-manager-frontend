@@ -13,7 +13,7 @@ export interface QuoteParams {
     created_at?: Timestamp;
 }
 
-export interface RandomQuote {
+export interface SuggestedQuote {
     text: string;
     author: string;
 }

@@ -10,7 +10,7 @@
     @include bg-suggested-quote;
     width: 100%;
     border-radius: 0 0 3px 3px;
-    transform: translateY(-100%);
+    transform: translateY(-130%);
     animation: open 0.1s cubic-bezier(.36,.07,.19,.97) both;
     padding: 24px 24px 0 24px;
     position: fixed;
@@ -19,6 +19,12 @@
     z-index: 8;
     animation-delay: 1s;
 
+    &__newIcon {
+        display: block;
+        font-size: 34px;
+        color: $brand-01;
+        margin: 0 auto 30px auto;
+    }
     &__body {
         max-width: 1030px;
         margin: 0 auto;
@@ -28,7 +34,7 @@
         display: block;
         font-style: italic;
         opacity: 0.6;
-        margin-top: 20px;
+        margin-top: 16px;
         margin-bottom: 0
     }
     &__content {
@@ -37,7 +43,6 @@
         word-wrap: break-word;
         padding-bottom: 16px;
         margin-top: 14px;
-        hyphens: auto;
     }
     &__actionsWrap {
         display: flex;
@@ -47,6 +52,21 @@
         position: absolute;
         bottom: 8px;
         right: -2px;
+    }
+    &__action {
+
+        &.-save {
+
+            mat-icon {
+                transition: color 0.2s ease-in-out;
+            }
+            &:hover, &:active {
+
+                mat-icon {
+                    color:$support-02;
+                }
+            }
+        }
     }
     &.-hidden {
         transform: translateY(0%);
@@ -76,3 +96,6 @@
         transform: translateY(-100%);
     }
 }
+
+
+

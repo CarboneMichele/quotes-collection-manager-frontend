@@ -1,11 +1,12 @@
 <div class="qcm-suggestedQuote" [ngClass]="{ '-hidden': hidden }">
     <div class="qcm-suggestedQuote__body">
+        <mat-icon class="qcm-suggestedQuote__newIcon">fiber_new</mat-icon>
         <p class="qcm-suggestedQuote__content">
             {{ quote.text }}
             <span class="qcm-suggestedQuote__author"> {{ quote.author ? quote.author : 'Anonymous' }}</span>
         </p>
         <div class="qcm-suggestedQuote__actionsWrap">
-            <button mat-icon-button class="qcm-suggestedQuote__action" (click)="saveQuote()">
+            <button mat-icon-button class="qcm-suggestedQuote__action -save" (click)="saveQuote()">
                 <mat-icon>favorite_border</mat-icon>
             </button>
             <button mat-icon-button class="qcm-suggestedQuote__action" (click)="hide()">

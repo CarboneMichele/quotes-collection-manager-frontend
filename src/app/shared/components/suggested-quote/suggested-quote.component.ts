@@ -19,7 +19,8 @@ export class SuggestedQuoteComponent {
     //
 
     saveQuote(): void {
-        this.quoteSaved.emit({ content: this.quote?.text.trim(), author: this.quote?.author.trim() });
+        const author = this.quote?.author ? this.quote?.author.trim() : '';
+        this.quoteSaved.emit({ content: this.quote?.text.trim(), author: author });
         this.hide();
     }
 

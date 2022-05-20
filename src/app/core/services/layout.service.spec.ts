@@ -1,5 +1,4 @@
 import { TestBed } from '@angular/core/testing';
-
 import { LayoutService } from './layout.service';
 
 describe('LayoutService', () => {

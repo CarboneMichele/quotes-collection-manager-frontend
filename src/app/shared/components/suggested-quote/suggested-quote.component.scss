@@ -7,7 +7,7 @@
 }
 .qcm-suggestedQuote {
     @include bottom-box-shadow;
-    @include bg-suggested-quote;
+    @include bg-gradient-suggested-quote;
     width: 100%;
     border-radius: 0 0 3px 3px;
     transform: translateY(-130%);

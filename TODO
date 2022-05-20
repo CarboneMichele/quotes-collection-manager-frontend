@@ -1,7 +1,0 @@
-# build config:
-
--   Add husky
--   Add scripts: lint fix:all and lint:all
--   Add auto import order
-
-# firebase setup:

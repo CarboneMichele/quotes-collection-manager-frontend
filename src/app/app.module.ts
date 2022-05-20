@@ -10,6 +10,7 @@ import { environment } from '../environments/environment';
 import { provideAuth, getAuth } from '@angular/fire/auth';
 import { provideFirestore, getFirestore } from '@angular/fire/firestore';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FIREBASE_OPTIONS } from '@angular/fire/compat';
 
 @NgModule({
     declarations: [AppComponent],
@@ -24,5 +25,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
         SharedModule,
     ],
     bootstrap: [AppComponent],
+    providers: [{ provide: FIREBASE_OPTIONS, useValue: environment.firebase }],
 })
 export class AppModule {}

@@ -1,10 +1,12 @@
-import { ClipboardService } from './../../core/services/clipboard.service';
-import { UtilsService } from './../../core/services/utils.service';
 import { Subscription } from 'rxjs';
+import { Router } from '@angular/router';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 
+import { ClipboardService } from './../../core/services/clipboard.service';
+import { UtilsService } from './../../core/services/utils.service';
 import { NotificationsService } from './../../core/services/notifications.service';
 import { QuotesService } from './../../core/services/quotes.service';
+import { AuthService } from 'src/app/core/services/auth.service';
 
 import { QuoteParams } from './../../shared/models/quotes.model';
 import { Quote, SuggestedQuote } from 'src/app/shared/models/quotes.model';
@@ -30,7 +32,9 @@ export class QuotesCollectorComponent implements OnInit, OnDestroy {
         private quotesService: QuotesService,
         private notificationsService: NotificationsService,
         private utilsService: UtilsService,
-        private clipboardService: ClipboardService
+        private clipboardService: ClipboardService,
+        private authService: AuthService,
+        private router: Router
     ) {}
 
     ngOnInit(): void {
@@ -116,10 +120,23 @@ export class QuotesCollectorComponent implements OnInit, OnDestroy {
     }
 
     //
+    // ─── AUTH METHODS ───────────────────────────────────────────────────────────────
+    //
+
+    signOut(): void {
+        this.authService.signOut().subscribe(() => {
+            this.notificationsService.openSnackBar('Successfully logged out', undefined, false);
+            this.router.navigate(['sign-in']);
+        });
+    }
+
+    //
     // ─── ON DESTROY ─────────────────────────────────────────────────────────────────
     //
 
     ngOnDestroy(): void {
-        this.quotesListSubscription.unsubscribe();
+        if (this.quotesListSubscription) {
+            this.quotesListSubscription.unsubscribe();
+        }
     }
 }

@@ -1,5 +1,7 @@
-import { LayoutService } from './../../../core/services/layout.service';
 import { Component, Output, EventEmitter } from '@angular/core';
+import { Router } from '@angular/router';
+import { LayoutService } from './../../../core/services/layout.service';
+import { AuthService } from 'src/app/core/services/auth.service';
 
 @Component({
     selector: 'qcm-toolbar',
@@ -11,7 +13,7 @@ export class ToolbarComponent {
 
     @Output() textSearched = new EventEmitter<string>();
 
-    constructor(private layoutService: LayoutService) {}
+    constructor(private layoutService: LayoutService, private authService: AuthService, private router: Router) {}
 
     //
     // ─── TEXT SEARCH METHODS ────────────────────────────────────────────────────────

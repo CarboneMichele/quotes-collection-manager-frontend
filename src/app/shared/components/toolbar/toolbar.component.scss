@@ -1,5 +1,5 @@
 /* stylelint-disable selector-pseudo-element-no-unknown */
-@import '../../../../assets/scss/colors';
+@import "../../../../assets/scss/colors";
 
 .qcm-toolbar {
     width: 100%;
@@ -12,6 +12,7 @@
     z-index: 9;
 
     &__action {
+
         &.-search {
             width: 327px;
         }
@@ -29,7 +30,9 @@
 }
 
 @media screen and (min-width: 600px) {
+
     .qcm-toolbar {
+
         &__content {
             flex-direction: row;
             flex-wrap: nowrap;
@@ -40,7 +43,9 @@
 }
 
 ::ng-deep {
+
     .qcm-toolbar {
+
         .mat-form-field-wrapper {
             padding-bottom: 0 !important;
         }

@@ -1,9 +1,8 @@
-import { LayoutService } from './../../../core/services/layout.service';
-import { QuoteParams } from './../../models/quotes.model';
 import { Subscription } from 'rxjs';
 import { Component, OnInit, OnDestroy, ChangeDetectorRef, Output, EventEmitter } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 
+import { LayoutService } from './../../../core/services/layout.service';
 import { UtilsService } from './../../../core/services/utils.service';
 import { QuotesService } from './../../../core/services/quotes.service';
 
@@ -11,6 +10,8 @@ import { NoWhitespaceValidator } from '../../validators/no-whitespace.validator'
 import { NoDuplicatesValidator } from '../../validators/no-duplicates.validator';
 
 import { Constants } from 'src/app/core/constants/constants';
+
+import { QuoteParams } from './../../models/quotes.model';
 import { Quote } from '../../models/quotes.model';
 
 @Component({
@@ -128,6 +129,8 @@ export class QuoteCreatorComponent implements OnInit, OnDestroy {
     //
 
     ngOnDestroy(): void {
-        this.quotesSubscription.unsubscribe();
+        if (this.quotesSubscription) {
+            this.quotesSubscription.unsubscribe();
+        }
     }
 }

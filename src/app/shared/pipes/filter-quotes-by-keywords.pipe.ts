@@ -1,5 +1,5 @@
-import { UtilsService } from './../../core/services/utils.service';
 import { Pipe, PipeTransform } from '@angular/core';
+import { UtilsService } from './../../core/services/utils.service';
 import { Quote } from '../models/quotes.model';
 
 @Pipe({
@@ -18,8 +18,6 @@ export class FilterQuotesByKeywordsPipe implements PipeTransform {
         if (!searchTextArr || searchTextArr.length === 0) {
             return quotes;
         }
-
-        console.log(quotes, searchTextArr);
 
         return quotes.filter((quote: Quote) => {
             if (quote && quote.content) {

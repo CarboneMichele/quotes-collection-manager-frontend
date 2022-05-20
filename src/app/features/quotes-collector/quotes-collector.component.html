@@ -13,5 +13,8 @@
                 *ngFor="let quote of quotes | filterQuotesByKeywords: searchText"
             ></qcm-quote>
         </div>
+        <button class="qcm-page__logoutBtn" (click)="signOut()">
+            <mat-icon>logout</mat-icon>
+        </button>
     </div>
 </div>

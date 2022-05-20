@@ -1,11 +1,12 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { QuotesCollectorComponent } from './quotes-collector.component';
+
+import { AuthComponent } from './auth.component';
 
 const routes: Routes = [
     {
         path: '',
-        component: QuotesCollectorComponent,
+        component: AuthComponent,
     },
 ];
 
@@ -13,4 +14,4 @@ const routes: Routes = [
     imports: [RouterModule.forChild(routes)],
     exports: [RouterModule],
 })
-export class QuotesCollectorRoutingModule {}
+export class AuthRoutingModule {}

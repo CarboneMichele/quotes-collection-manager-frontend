@@ -1,7 +1,6 @@
 @import "../../../../assets/scss/mixins";
 @import "../../../../assets/scss/colors";
 
-
 :host {
     width: 100%;
 }
@@ -11,7 +10,7 @@
     width: 100%;
     border-radius: 0 0 3px 3px;
     transform: translateY(-130%);
-    animation: open 0.1s cubic-bezier(.36,.07,.19,.97) both;
+    animation: open 0.1s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
     padding: 24px 24px 0 24px;
     position: fixed;
     top: 167px;
@@ -35,7 +34,7 @@
         font-style: italic;
         opacity: 0.6;
         margin-top: 16px;
-        margin-bottom: 0
+        margin-bottom: 0;
     }
     &__content {
         @include hyphenize;
@@ -60,17 +59,18 @@
             mat-icon {
                 transition: color 0.2s ease-in-out;
             }
-            &:hover, &:active {
+            &:hover,
+            &:active {
 
                 mat-icon {
-                    color:$support-02;
+                    color: $support-02;
                 }
             }
         }
     }
     &.-hidden {
         transform: translateY(0%);
-        animation: close 0.3s cubic-bezier(.36,.07,.19,.97) both;
+        animation: close 0.3s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
         animation-delay: 0;
     }
 }
@@ -81,7 +81,6 @@
         top: 90px;
     }
 }
-
 
 @keyframes open {
 
@@ -96,6 +95,3 @@
         transform: translateY(-100%);
     }
 }
-
-
-

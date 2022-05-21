@@ -1,3 +1,5 @@
+import { ErrorsService } from './../../core/services/errors.service';
+import { HttpErrorResponse } from '@angular/common/http';
 import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';
 import { Component, OnDestroy, OnInit } from '@angular/core';
@@ -10,6 +12,7 @@ import { AuthService } from 'src/app/core/services/auth.service';
 
 import { QuoteParams } from './../../shared/models/quotes.model';
 import { Quote, SuggestedQuote } from 'src/app/shared/models/quotes.model';
+import { Constants } from 'src/app/core/constants/constants';
 
 @Component({
     selector: 'qcm-quotes-collector',
@@ -34,7 +37,8 @@ export class QuotesCollectorComponent implements OnInit, OnDestroy {
         private utilsService: UtilsService,
         private clipboardService: ClipboardService,
         private authService: AuthService,
-        private router: Router
+        private router: Router,
+        private errorsService: ErrorsService
     ) {}
 
     ngOnInit(): void {
@@ -57,7 +61,7 @@ export class QuotesCollectorComponent implements OnInit, OnDestroy {
     subscribeToClipboardCopySource(): void {
         this.clipboardCopySubscription = this.clipboardService.updatedCopiedToClipboardSource$.subscribe((copied: boolean) => {
             if (copied) {
-                this.notificationsService.openSnackBar('Copied to clipboard', undefined, false);
+                this.notificationsService.openSnackBar(Constants.SUCCESS_CLIPBOARD, undefined, false);
             }
         });
     }
@@ -71,8 +75,8 @@ export class QuotesCollectorComponent implements OnInit, OnDestroy {
             next: (quotes: Quote[]) => {
                 this.updateQuotesList(quotes);
             },
-            error: () => {
-                this.notificationsService.openSnackBar('An error occurred while fetching quotes', undefined, true);
+            error: (err: HttpErrorResponse) => {
+                this.errorsService.handleError(err, Constants.ERROR_QUOTES_FETCH);
             },
         });
     }
@@ -80,10 +84,10 @@ export class QuotesCollectorComponent implements OnInit, OnDestroy {
     storeNewQuote(params: QuoteParams): void {
         this.quotesService.createNewQuote(params).subscribe({
             next: () => {
-                this.notificationsService.openSnackBar('New quote added successfully', undefined, false);
+                this.notificationsService.openSnackBar(Constants.SUCCESS_QUOTE_STORE, undefined, false);
             },
-            error: () => {
-                this.notificationsService.openSnackBar('An error occurred while storing the new quote', undefined, true);
+            error: (err: HttpErrorResponse) => {
+                this.errorsService.handleError(err, Constants.ERROR_QUOTE_STORE);
             },
         });
     }
@@ -105,8 +109,8 @@ export class QuotesCollectorComponent implements OnInit, OnDestroy {
             next: (suggestedQuote: SuggestedQuote) => {
                 this.suggestedQuote = suggestedQuote;
             },
-            error: (err: any) => {
-                this.notificationsService.openSnackBar('An error occurred while fetching the suggested quote', undefined, true);
+            error: (err: HttpErrorResponse) => {
+                this.errorsService.handleError(err, Constants.ERROR_SUGGESTED_QUOTE_FETCH);
             },
         });
     }
@@ -125,7 +129,7 @@ export class QuotesCollectorComponent implements OnInit, OnDestroy {
 
     signOut(): void {
         this.authService.signOut().subscribe(() => {
-            this.notificationsService.openSnackBar('Successfully logged out', undefined, false);
+            this.notificationsService.openSnackBar(Constants.SUCCESS_LOGOUT, undefined, false);
             this.router.navigate(['sign-in']);
         });
     }

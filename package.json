@@ -8,7 +8,9 @@
         "watch": "ng build --watch --configuration development",
         "test": "ng test",
         "lint": "npx eslint \"src/**/*.{js,jsx,ts,tsx}\" --quiet --fix",
-        "format": "npx prettier \"src/**/*.{js,jsx,ts,tsx}\" --write"
+        "lint:style": "npx stylelint \"src/**/*.{scss,css}\" --fix --custom-syntax postcss-scss",
+        "format": "npx prettier \"src/**/*.{js,jsx,ts,tsx}\" --write",
+        "prepare": "husky install"
     },
     "private": true,
     "dependencies": {
@@ -53,6 +55,7 @@
         "eslint-plugin-prefer-arrow": "^1.2.3",
         "eslint-plugin-prettier": "^4.0.0",
         "eslint-plugin-unused-imports": "^2.0.0",
+        "husky": "^8.0.1",
         "jasmine-core": "~4.1.0",
         "karma": "~6.3.0",
         "karma-chrome-launcher": "~3.1.0",

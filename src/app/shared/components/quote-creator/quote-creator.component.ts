@@ -66,6 +66,7 @@ export class QuoteCreatorComponent implements OnInit, OnDestroy {
     subscribeToShowVariable(): void {
         this.layoutService.updatedShouldShowCreatorFormSource$.subscribe((shouldShow: boolean) => {
             this.showQuoteCreator = shouldShow;
+            this.handleFieldsEditability();
         });
     }
 
@@ -122,6 +123,16 @@ export class QuoteCreatorComponent implements OnInit, OnDestroy {
             this.resetForm();
         }
         this.layoutService.hideCreatorForm();
+    }
+
+    handleFieldsEditability(): void {
+        if (!this.showQuoteCreator) {
+            this.quoteControl?.disable();
+            this.authorControl?.disable();
+        } else {
+            this.quoteControl?.enable();
+            this.authorControl?.enable();
+        }
     }
 
     //

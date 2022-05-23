@@ -10,6 +10,7 @@ import { ToolbarComponent } from './components/toolbar/toolbar.component';
 import { FilterQuotesByKeywordsPipe } from './pipes/filter-quotes-by-keywords.pipe';
 import { HighlightDirective } from './directives/highlight.directive';
 import { SuggestedQuoteComponent } from './components/suggested-quote/suggested-quote.component';
+import { NotFoundPageComponent } from './components/not-found-page/not-found-page.component';
 
 @NgModule({
     declarations: [
@@ -19,6 +20,7 @@ import { SuggestedQuoteComponent } from './components/suggested-quote/suggested-
         FilterQuotesByKeywordsPipe,
         HighlightDirective,
         SuggestedQuoteComponent,
+        NotFoundPageComponent,
     ],
     imports: [CommonModule, MaterialModule, FormsModule, ReactiveFormsModule],
     exports: [

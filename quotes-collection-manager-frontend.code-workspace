@@ -21,7 +21,7 @@
         "[yaml]": {
             "editor.formatOnSave": false
         },
-        "cSpell.words": ["browserslist", "editorconfig", "ngneat"],
+        "cSpell.words": ["browserslist", "Editability", "editorconfig", "ngneat"],
         "css.validate": false,
         "scss.validate": false,
         "stylelint.validate": ["css", "scss"]

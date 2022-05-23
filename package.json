@@ -2,18 +2,18 @@
     "name": "quotes-collection-manager-frontend",
     "version": "0.0.0",
     "scripts": {
-      "ng": "ng",
-      "start": "ng serve",
-      "build": "ng build",
-      "watch": "ng build --watch --configuration development",
-      "test": "ng test",
-      "lint": "npx eslint \"src/**/*.{js,jsx,ts,tsx}\" --quiet --fix",
-      "lint:style": "npx stylelint \"src/**/*.{scss,css}\" --fix --custom-syntax postcss-scss",
-      "format": "npx prettier \"src/**/*.{js,jsx,ts,tsx}\" --write",
-      "prepare": "husky install",
-      "e2e": "ng e2e",
-      "cypress:open": "cypress open",
-      "cypress:run": "cypress run"
+        "ng": "ng",
+        "start": "ng serve",
+        "build": "ng build",
+        "watch": "ng build --watch --configuration development",
+        "test": "ng test",
+        "lint": "npx eslint \"src/**/*.{js,jsx,ts,tsx}\" --quiet --fix",
+        "lint:style": "npx stylelint \"src/**/*.{scss,css}\" --fix --custom-syntax postcss-scss",
+        "format": "npx prettier \"src/**/*.{js,jsx,ts,tsx}\" --write",
+        "prepare": "husky install",
+        "e2e": "ng e2e",
+        "cypress:open": "cypress open",
+        "cypress:run": "cypress run"
     },
     "private": true,
     "dependencies": {
@@ -52,6 +52,8 @@
         "@typescript-eslint/eslint-plugin": "5.22.0",
         "@typescript-eslint/eslint-plugin-tslint": "^5.10.0",
         "@typescript-eslint/parser": "5.22.0",
+        "cypress": "latest",
+        "cypress-firebase": "^2.2.1",
         "eslint": "^8.2.0",
         "eslint-config-prettier": "^8.3.0",
         "eslint-plugin-import": "^2.25.4",
@@ -59,6 +61,7 @@
         "eslint-plugin-prefer-arrow": "^1.2.3",
         "eslint-plugin-prettier": "^4.0.0",
         "eslint-plugin-unused-imports": "^2.0.0",
+        "firebase-admin": "9",
         "husky": "^8.0.1",
         "jasmine-core": "~4.1.0",
         "karma": "~6.3.0",
@@ -71,7 +74,6 @@
         "stylelint-config-recommended": "^7.0.0",
         "stylelint-order": "^5.0.0",
         "stylelint-scss": "^4.2.0",
-        "typescript": "~4.6.2",
-        "cypress": "latest"
+        "typescript": "~4.6.2"
     }
 }

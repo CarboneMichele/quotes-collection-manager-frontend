@@ -41,3 +41,24 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite("visit", (originalFn, url, options) => { ... })
+
+import firebase from 'firebase/compat/app';
+import 'firebase/compat/auth';
+import 'firebase/compat/database';
+import 'firebase/compat/firestore';
+import { attachCustomCommands } from 'cypress-firebase';
+
+const fbConfig = {
+    projectId: 'quotes-collection-manager',
+    appId: '1:953752700344:web:b1c665ed69266f8bb2bb4d',
+    storageBucket: 'quotes-collection-manager.appspot.com',
+    locationId: 'europe-west',
+    apiKey: 'AIzaSyBfmbuqoNIJ5umpXlsGvhpkrtCiC_qh5Y8',
+    authDomain: 'quotes-collection-manager.firebaseapp.com',
+    messagingSenderId: '953752700344',
+    measurementId: 'G-62GB5RYGKY',
+};
+
+firebase.initializeApp(fbConfig);
+
+attachCustomCommands({ Cypress, cy, firebase });

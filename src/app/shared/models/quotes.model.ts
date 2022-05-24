@@ -11,6 +11,7 @@ export interface QuoteParams {
     content: string;
     author: string | null;
     created_at?: Timestamp;
+    owner?: string;
 }
 
 export interface SuggestedQuote {

@@ -1,7 +1,7 @@
 import { ErrorsService } from './../../core/services/errors.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Subscription } from 'rxjs';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Data, Router } from '@angular/router';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 
 import { ClipboardService } from './../../core/services/clipboard.service';
@@ -20,7 +20,7 @@ import { Constants } from 'src/app/core/constants/constants';
     styleUrls: ['./quotes-collector.component.scss'],
 })
 export class QuotesCollectorComponent implements OnInit, OnDestroy {
-    public quotes!: Quote[];
+    public quotes: Quote[] = [];
     public suggestedQuote!: SuggestedQuote;
     public searchText: string[] = [];
 
@@ -29,7 +29,10 @@ export class QuotesCollectorComponent implements OnInit, OnDestroy {
     //
 
     public quotesListSubscription!: Subscription;
+    public quotesCollectionSubscription!: Subscription;
     public clipboardCopySubscription!: Subscription;
+
+    private uid!: string;
 
     constructor(
         private quotesService: QuotesService,
@@ -38,19 +41,29 @@ export class QuotesCollectorComponent implements OnInit, OnDestroy {
         private clipboardService: ClipboardService,
         private authService: AuthService,
         private router: Router,
-        private errorsService: ErrorsService
+        private errorsService: ErrorsService,
+        private activatedRoute: ActivatedRoute
     ) {}
 
     ngOnInit(): void {
         this.subscribeToQuoteListSource();
         this.subscribeToClipboardCopySource();
-        this.getQuotes();
+        this.subscribeToUidSource();
         this.getSuggestedQuote();
     }
 
     //
     // ─── OBSERVABLE - SUBSCRIPTIONS METHODS ─────────────────────────────────────────────────────────────
     //
+
+    subscribeToUidSource(): void {
+        this.activatedRoute.data.subscribe((data: Data | null) => {
+            if (data !== null && data !== undefined) {
+                this.uid = data['uid'];
+                this.getQuotes(this.uid);
+            }
+        });
+    }
 
     subscribeToQuoteListSource(): void {
         this.quotesListSubscription = this.quotesService.updatedQuotesListSource$.subscribe((quotes: Quote[]) => {
@@ -70,8 +83,8 @@ export class QuotesCollectorComponent implements OnInit, OnDestroy {
     // ─── QUOTES METHODS ─────────────────────────────────────────────────────────────
     //
 
-    getQuotes(): void {
-        this.quotesService.getQuotes().subscribe({
+    getQuotes(uid: string | null): void {
+        this.quotesCollectionSubscription = this.quotesService.getQuotes(uid).subscribe({
             next: (quotes: Quote[]) => {
                 this.updateQuotesList(quotes);
             },
@@ -82,7 +95,8 @@ export class QuotesCollectorComponent implements OnInit, OnDestroy {
     }
 
     storeNewQuote(params: QuoteParams): void {
-        this.quotesService.createNewQuote(params).subscribe({
+        const newQuote = { ...params, owner: this.uid };
+        this.quotesService.createNewQuote(newQuote).subscribe({
             next: () => {
                 this.notificationsService.openSnackBar(Constants.SUCCESS_QUOTE_STORE, undefined, false);
             },
@@ -139,8 +153,14 @@ export class QuotesCollectorComponent implements OnInit, OnDestroy {
     //
 
     ngOnDestroy(): void {
+        if (this.quotesCollectionSubscription) {
+            this.quotesCollectionSubscription.unsubscribe();
+        }
         if (this.quotesListSubscription) {
             this.quotesListSubscription.unsubscribe();
+        }
+        if (this.clipboardCopySubscription) {
+            this.clipboardCopySubscription.unsubscribe();
         }
     }
 }

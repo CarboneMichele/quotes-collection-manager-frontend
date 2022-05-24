@@ -28,12 +28,12 @@ export class AuthComponent {
         private errorsService: ErrorsService
     ) {}
 
+    //
+    // ─── SIGN IN METHODS ────────────────────────────────────────────────────────────
+    //
+
     loginWithGoogle(): void {
         this.authService.loginWithGoogle().subscribe(this.authSubscribeHandler);
-    }
-
-    loginAsGuest(): void {
-        this.authService.loginAsGuest().subscribe(this.authSubscribeHandler);
     }
 
     redirectToQuotesRoute(): void {

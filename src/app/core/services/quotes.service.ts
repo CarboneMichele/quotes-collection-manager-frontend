@@ -2,7 +2,8 @@ import { from, map, Observable, Subject } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
-import { addDoc, collection, collectionData, DocumentData, Firestore } from '@angular/fire/firestore';
+import { DocumentData } from '@angular/fire/firestore';
+import { AngularFirestore, AngularFirestoreCollection, CollectionReference } from '@angular/fire/compat/firestore';
 
 import { Quote, QuoteParams } from './../../shared/models/quotes.model';
 import { SuggestedQuote } from 'src/app/shared/models/quotes.model';
@@ -11,7 +12,8 @@ import { SuggestedQuote } from 'src/app/shared/models/quotes.model';
     providedIn: 'root',
 })
 export class QuotesService {
-    public firestoreQuotesCollection = collection(this.firestore, 'quotes');
+    public firestoreQuotesCollection = this.firestore.collection(`/quotes`);
+    public firestoreUserQuotesCollection!: AngularFirestoreCollection<DocumentData>;
 
     public quotesListSource = new Subject<Quote[]>();
     public updatedQuotesListSource$: Observable<Quote[]> = this.quotesListSource.asObservable();
@@ -19,14 +21,16 @@ export class QuotesService {
     public newQuoteSource = new Subject<QuoteParams>();
     public updatedNewQuoteSource$: Observable<QuoteParams> = this.newQuoteSource.asObservable();
 
-    constructor(private httpClient: HttpClient, private firestore: Firestore) {}
+    constructor(private httpClient: HttpClient, private firestore: AngularFirestore) {}
 
     //
     // ─── GET REQUESTS ───────────────────────────────────────────────────────────────
     //
 
-    getQuotes(): Observable<Quote[]> {
-        return collectionData(this.firestoreQuotesCollection, { idField: 'id' }) as Observable<Quote[]>;
+    getQuotes(uid: string | null): any {
+        return this.firestore
+            .collection('/quotes', (ref: CollectionReference<DocumentData>) => ref.where('owner', '==', uid))
+            .valueChanges() as Observable<Quote[]>;
     }
 
     getSuggestedQuote(): Observable<SuggestedQuote> {
@@ -41,14 +45,10 @@ export class QuotesService {
     // ─── POST REQUESTS ──────────────────────────────────────────────────────────────
     //
 
-    createNewQuote(quote: QuoteParams): Observable<DocumentData> {
+    createNewQuote(quote: QuoteParams): Observable<unknown> {
         const params = { ...quote, created_at: new Date() };
-        return from(addDoc(this.firestoreQuotesCollection, params));
+        return from(this.firestoreQuotesCollection.add(params));
     }
-
-    //
-    // ─── PATCH REQUESTS ─────────────────────────────────────────────────────────────
-    //
 
     //
     // ─── CLIPBOARD METHODS ──────────────────────────────────────────────────────────

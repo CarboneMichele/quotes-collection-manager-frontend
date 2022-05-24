@@ -1,6 +1,6 @@
-import { from, Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
+import { BehaviorSubject, from, Observable } from 'rxjs';
+
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import firebase from 'firebase/compat/app';
 import 'firebase/auth';
@@ -9,14 +9,21 @@ import 'firebase/auth';
     providedIn: 'root',
 })
 export class AuthService {
-    constructor(private fireAuth: AngularFireAuth, private router: Router) {}
+    public userIdSource = new BehaviorSubject<string | null>(null);
+    public updatedUserId$ = this.userIdSource.asObservable();
+
+    constructor(private fireAuth: AngularFireAuth) {
+        this.fireAuth.authState.subscribe((user: firebase.User | null) => {
+            this.emitUserId(user);
+        });
+    }
 
     loginWithGoogle(): Observable<firebase.auth.UserCredential> {
         return from(this.fireAuth.signInWithPopup(new firebase.auth.GoogleAuthProvider()));
     }
 
-    loginAsGuest(): Observable<firebase.auth.UserCredential> {
-        return from(this.fireAuth.signInAnonymously());
+    emitUserId(user: firebase.User | null): void {
+        this.userIdSource.next(user ? user!.uid : null);
     }
 
     signOut(): Observable<void> {

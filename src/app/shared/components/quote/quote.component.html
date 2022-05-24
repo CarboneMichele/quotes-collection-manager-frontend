@@ -1,8 +1,13 @@
-<div class="qcm-quote">
+<div class="qcm-quote" data-cy="quote">
     <mat-icon class="qcm-quote__icon"> format_quote</mat-icon>
-    <p class="qcm-quote__content" [qcm-highlight]="searchTerms" [innerText]="quote.content"></p>
-    <p class="qcm-quote__author" [qcm-highlight]="searchTerms" [innerText]="quote.author ? '- ' + quote.author : '- Anonymous'"></p>
-    <button mat-icon-button class="qcm-quote__action" (click)="copyToClipboard()">
+    <p class="qcm-quote__content" [qcm-highlight]="searchTerms" [innerText]="quote.content" data-cy="quote-content"></p>
+    <p
+        class="qcm-quote__author"
+        [qcm-highlight]="searchTerms"
+        [innerText]="quote.author ? '- ' + quote.author : '- Anonymous'"
+        data-cy="quote-author"
+    ></p>
+    <button mat-icon-button class="qcm-quote__action" (click)="copyToClipboard()" data-cy="copy-to-clipboard-button">
         <mat-icon>content_copy</mat-icon>
     </button>
 </div>

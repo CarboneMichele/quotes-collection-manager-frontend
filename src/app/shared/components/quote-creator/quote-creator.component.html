@@ -1,4 +1,4 @@
-<div class="qcm-quoteCreator" [ngClass]="{ '-show': showQuoteCreator }">
+<div class="qcm-quoteCreator" [ngClass]="{ '-show': showQuoteCreator }" data-cy="quote-creator">
     <div class="qcm-quoteCreator__content">
         <h5 class="qcm-quoteCreator__title">Add a new quote</h5>
         <form class="qcm-quoteCreator__form" [formGroup]="quoteCreationForm">
@@ -11,6 +11,7 @@
                     cdkAutosizeMaxRows="6"
                     placeholder="Type or paste a quote"
                     formControlName="quote"
+                    data-cy="quote-content-field"
                 ></textarea>
                 <mat-error *ngIf="quoteControl?.hasError('required')">This field is required</mat-error>
                 <mat-error *ngIf="quoteControl?.hasError('maxlength')"
@@ -26,7 +27,7 @@
 
             <mat-form-field appearance="outline" color="primary">
                 <mat-label>Author</mat-label>
-                <input matInput placeholder="Insert author's name" formControlName="author" />
+                <input matInput placeholder="Insert author's name" formControlName="author" data-cy="quote-author-field" />
                 <mat-error *ngIf="authorControl?.hasError('maxlength')"
                     >You have exceeded {{ constants.AUTHOR_MAX_LENGTH }} characters</mat-error
                 >
@@ -40,6 +41,7 @@
                     color="primary"
                     [disabled]="quoteCreationForm.invalid"
                     (click)="onSubmit()"
+                    data-cy="quote-submit-button"
                 >
                     SUBMIT QUOTE
                 </button>
@@ -49,6 +51,7 @@
                     mat-raised-button
                     color="accent"
                     (click)="hideQuoteCreatorForm(true)"
+                    data-cy="close-creator-button"
                 >
                     CANCEL
                 </button>

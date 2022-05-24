@@ -1,15 +1,19 @@
-<div class="qcm-suggestedQuote" [ngClass]="{ '-hidden': hidden }">
+<div class="qcm-suggestedQuote" [ngClass]="{ '-hidden': hidden }" data-cy="suggested-quote-banner">
     <div class="qcm-suggestedQuote__body">
         <mat-icon class="qcm-suggestedQuote__newIcon">fiber_new</mat-icon>
-        <p class="qcm-suggestedQuote__content">
-            {{ quote.text }}
-            <span class="qcm-suggestedQuote__author"> {{ quote.author ? quote.author : 'Anonymous' }}</span>
+        <p class="qcm-suggestedQuote__contentWrap">
+            <span class="qcm-suggestedQuote__content" data-cy="suggested-quote-content">
+                {{ quote.text }}
+            </span>
+            <span class="qcm-suggestedQuote__author" data-cy="suggested-quote-author">
+                {{ quote.author ? quote.author : 'Anonymous' }}
+            </span>
         </p>
         <div class="qcm-suggestedQuote__actionsWrap">
-            <button mat-icon-button class="qcm-suggestedQuote__action -save" (click)="saveQuote()">
+            <button mat-icon-button class="qcm-suggestedQuote__action -save" (click)="saveQuote()" data-cy="suggested-quote-save-button">
                 <mat-icon>favorite_border</mat-icon>
             </button>
-            <button mat-icon-button class="qcm-suggestedQuote__action" (click)="hide()">
+            <button mat-icon-button class="qcm-suggestedQuote__action" (click)="hide()" data-cy="suggested-quote-dismiss-button">
                 <mat-icon>delete_outline_icon</mat-icon>
             </button>
         </div>

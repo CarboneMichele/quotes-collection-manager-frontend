@@ -6,7 +6,7 @@
             <p class="qcm-page__emptyQuotesSectionMessage">You have no saved quotes</p>
         </div>
         <qcm-suggested-quote [quote]="suggestedQuote" *ngIf="suggestedQuote" (quoteSaved)="storeNewQuote($event)"></qcm-suggested-quote>
-        <div class="qcm-page__quotesList" *ngIf="quotes && quotes.length">
+        <div class="qcm-page__quotesList" *ngIf="quotes && quotes.length" data-cy="quotes-list">
             <qcm-quote
                 [quote]="quote"
                 [searchTerms]="searchText"

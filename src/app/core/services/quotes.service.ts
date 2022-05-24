@@ -51,12 +51,6 @@ export class QuotesService {
     }
 
     //
-    // ─── CLIPBOARD METHODS ──────────────────────────────────────────────────────────
-    //
-
-    copyToClipboard(quote: Quote): void {}
-
-    //
     // ─── SUBSCRIPTIONS - SUBJECTS METHODS ──────────────────────────────────────────────────────
     //
 

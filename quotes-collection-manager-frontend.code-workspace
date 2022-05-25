@@ -23,8 +23,7 @@
         },
         "cSpell.words": ["browserslist", "Editability", "editorconfig", "ngneat"],
         "css.validate": false,
-        "scss.validate": false,
-        "stylelint.validate": ["css", "scss"]
+        "scss.validate": false
     },
     "extensions": {
         "recommendations": [

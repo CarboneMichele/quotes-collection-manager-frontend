@@ -11,6 +11,7 @@ import { FilterQuotesByKeywordsPipe } from './pipes/filter-quotes-by-keywords.pi
 import { HighlightDirective } from './directives/highlight.directive';
 import { SuggestedQuoteComponent } from './components/suggested-quote/suggested-quote.component';
 import { NotFoundPageComponent } from './components/not-found-page/not-found-page.component';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
     declarations: [
@@ -22,7 +23,7 @@ import { NotFoundPageComponent } from './components/not-found-page/not-found-pag
         SuggestedQuoteComponent,
         NotFoundPageComponent,
     ],
-    imports: [CommonModule, MaterialModule, FormsModule, ReactiveFormsModule],
+    imports: [CommonModule, MaterialModule, FormsModule, ReactiveFormsModule, RouterModule],
     exports: [
         QuoteCreatorComponent,
         QuoteComponent,

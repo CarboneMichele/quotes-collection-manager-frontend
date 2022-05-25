@@ -6,9 +6,7 @@ describe('Search filter flow', () => {
 
     it('Should filter quotes by keywords', () => {
         const keywords = ['one', 'two', 'three'];
-
         const regex = new RegExp(`(${keywords.join('|')})`, 'g');
-        cy.get('[data-cy="quote"]').contains(regex, { matchCase: false }).its('length');
         cy.get('[data-cy="quote"]')
             .filter((index: number, el: HTMLElement) => {
                 const content = el.querySelector('[data-cy="quote-content"]')?.innerHTML || '';

@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { redirectUnauthorizedTo, redirectLoggedInTo, AuthPipe, canActivate } from '@angular/fire/auth-guard';
+import { NotFoundPageComponent } from './shared/components/not-found-page/not-found-page.component';
 
 const routes: Routes = [
     {
@@ -17,6 +18,8 @@ const routes: Routes = [
             ),
         ...canActivate((): AuthPipe => redirectUnauthorizedTo(['sign-in'])),
     },
+    { path: '404', component: NotFoundPageComponent },
+    { path: '**', redirectTo: '/404' },
 ];
 
 @NgModule({

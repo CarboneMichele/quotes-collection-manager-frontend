@@ -1,24 +1,23 @@
-@import './../../../../assets/scss/mixins';
-@import './../../../../assets/scss/colors';
+@import "./../../../../assets/scss/mixins";
+@import "./../../../../assets/scss/colors";
 
 .qcm-notFoundPage {
+    @include bg-gradient-404;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     height: 100vh;
-    @include bg-gradient-404;
 
 
     &__messageTitle {
+        line-height: 60px;
         font-size: 60px;
         font-weight: bold;
-        line-height: 60px;
         color: $brand-01;
         text-align: center;
         text-transform: uppercase;
     }
-
     &__redirectButton {
         display: block;
         margin: 20px auto;

@@ -22,7 +22,7 @@ export class HighlightDirective implements OnChanges {
                 } else {
                     const regex = new RegExp(this.searchTerms.join('|'), 'gi');
                     const newText = text?.replace(regex, (match: string) => {
-                        return `<mark class="qcm-highlight">${match}</mark>`;
+                        return `<mark [data-cy="quote-mark"] class="qcm-highlight">${match}</mark>`;
                     });
                     const sanitized = this.sanitizer.sanitize(SecurityContext.HTML, newText || '');
                     this.content = sanitized || '';

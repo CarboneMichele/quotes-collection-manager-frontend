@@ -22,7 +22,9 @@
             "editor.formatOnSave": false
         },
         "cSpell.words": ["browserslist", "Editability", "editorconfig", "ngneat"],
+        "stylelint.validate": ["css", "scss"],
         "css.validate": false,
+        "less.validate": false,
         "scss.validate": false
     },
     "extensions": {

@@ -1,10 +1,8 @@
-import { Subscription } from 'rxjs';
-import { Component, OnInit, OnDestroy, ChangeDetectorRef, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, Output, EventEmitter, Input, OnChanges, SimpleChanges, OnDestroy } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { LayoutService } from './../../../core/services/layout.service';
 import { UtilsService } from './../../../core/services/utils.service';
-import { QuotesService } from './../../../core/services/quotes.service';
 
 import { NoWhitespaceValidator } from '../../validators/no-whitespace.validator';
 import { NoDuplicatesValidator } from '../../validators/no-duplicates.validator';
@@ -13,25 +11,26 @@ import { Constants } from 'src/app/core/constants/constants';
 
 import { QuoteParams } from './../../models/quotes.model';
 import { Quote } from '../../models/quotes.model';
+import { Subscription } from 'rxjs';
 
 @Component({
     selector: 'qcm-quote-creator',
     templateUrl: './quote-creator.component.html',
     styleUrls: ['./quote-creator.component.scss'],
 })
-export class QuoteCreatorComponent implements OnInit, OnDestroy {
+export class QuoteCreatorComponent implements OnInit, OnChanges, OnDestroy {
     public constants = Constants;
     public quoteCreationForm!: FormGroup;
     public showQuoteCreator = false;
 
-    private quotesSubscription!: Subscription;
     private quotesContents: string[] = [];
+    private layoutSubscription!: Subscription;
 
+    @Input() quotes!: Quote[];
     @Output() quoteCreated = new EventEmitter<QuoteParams>();
 
     constructor(
         private formBuilder: FormBuilder,
-        private quotesService: QuotesService,
         private cd: ChangeDetectorRef,
         private utilsService: UtilsService,
         private layoutService: LayoutService
@@ -50,9 +49,13 @@ export class QuoteCreatorComponent implements OnInit, OnDestroy {
     //
 
     ngOnInit(): void {
-        this.createForm();
-        this.subscribeToQuotesList();
         this.subscribeToShowVariable();
+    }
+
+    ngOnChanges(changes: SimpleChanges): void {
+        this.quotes = changes['quotes'].currentValue;
+        this.createForm();
+        this.setupForm();
     }
 
     emitQuoteCreationEvent(): void {
@@ -64,18 +67,9 @@ export class QuoteCreatorComponent implements OnInit, OnDestroy {
     //
 
     subscribeToShowVariable(): void {
-        this.layoutService.updatedShouldShowCreatorFormSource$.subscribe((shouldShow: boolean) => {
+        this.layoutSubscription = this.layoutService.updatedShouldShowCreatorFormSource$.subscribe((shouldShow: boolean) => {
             this.showQuoteCreator = shouldShow;
             this.handleFieldsEditability();
-        });
-    }
-
-    subscribeToQuotesList(): void {
-        this.quotesService.updatedQuotesListSource$.subscribe((quotes: Quote[]) => {
-            this.quotesContents = quotes.map((quote: Quote) => {
-                return this.utilsService.lowerCaseRemoveSpacesAndTrim(quote.content);
-            });
-            this.setQuotesValidators();
         });
     }
 
@@ -88,6 +82,13 @@ export class QuoteCreatorComponent implements OnInit, OnDestroy {
             quote: ['', [Validators.required, Validators.maxLength(Constants.QUOTE_MAX_LENGTH), NoWhitespaceValidator]],
             author: ['', Validators.maxLength(Constants.AUTHOR_MAX_LENGTH)],
         });
+    }
+
+    setupForm(): void {
+        this.quotesContents = this.quotes.map((quote: Quote) => {
+            return this.utilsService.lowerCaseRemoveSpacesAndTrim(quote.content);
+        });
+        this.setQuotesValidators();
     }
 
     onSubmit(): void {
@@ -140,8 +141,8 @@ export class QuoteCreatorComponent implements OnInit, OnDestroy {
     //
 
     ngOnDestroy(): void {
-        if (this.quotesSubscription) {
-            this.quotesSubscription.unsubscribe();
+        if (this.layoutSubscription) {
+            this.layoutSubscription.unsubscribe();
         }
     }
 }

@@ -1,6 +1,6 @@
 <div class="qcm-page">
     <div class="qcm-page__content">
-        <qcm-quote-creator (quoteCreated)="storeNewQuote($event)"></qcm-quote-creator>
+        <qcm-quote-creator (quoteCreated)="storeNewQuote($event)" [quotes]="quotes"></qcm-quote-creator>
         <qcm-toolbar (textSearched)="updateSearchText($event)"></qcm-toolbar>
         <div class="qcm-page__emptyQuotesSection" *ngIf="quotes && !(quotes | filterQuotesByKeywords: searchText).length">
             <p class="qcm-page__emptyQuotesSectionMessage" data-cy="empty-quotes-section">No quotes to show</p>

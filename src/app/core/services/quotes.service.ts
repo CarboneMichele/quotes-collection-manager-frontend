@@ -15,9 +15,6 @@ export class QuotesService {
     public firestoreQuotesCollection = this.firestore.collection(`/quotes`);
     public firestoreUserQuotesCollection!: AngularFirestoreCollection<DocumentData>;
 
-    public quotesListSource = new Subject<Quote[]>();
-    public updatedQuotesListSource$: Observable<Quote[]> = this.quotesListSource.asObservable();
-
     public newQuoteSource = new Subject<QuoteParams>();
     public updatedNewQuoteSource$: Observable<QuoteParams> = this.newQuoteSource.asObservable();
 
@@ -48,17 +45,5 @@ export class QuotesService {
     createNewQuote(quote: QuoteParams): Observable<unknown> {
         const params = { ...quote, created_at: new Date() };
         return from(this.firestoreQuotesCollection.add(params));
-    }
-
-    //
-    // ─── SUBSCRIPTIONS - SUBJECTS METHODS ──────────────────────────────────────────────────────
-    //
-
-    updateQuotesList(quotes: Quote[]): void {
-        this.quotesListSource.next(quotes);
-    }
-
-    updateNewQuoteSource(params: QuoteParams): void {
-        this.newQuoteSource.next(params);
     }
 }

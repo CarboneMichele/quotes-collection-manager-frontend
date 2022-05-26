@@ -46,9 +46,8 @@ export class QuotesCollectorComponent implements OnInit, OnDestroy {
     ) {}
 
     ngOnInit(): void {
-        this.subscribeToQuoteListSource();
-        this.subscribeToClipboardCopySource();
         this.subscribeToUidSource();
+        this.subscribeToClipboardCopySource();
         this.getSuggestedQuote();
     }
 
@@ -62,12 +61,6 @@ export class QuotesCollectorComponent implements OnInit, OnDestroy {
                 this.uid = data['uid'];
                 this.getQuotes(this.uid);
             }
-        });
-    }
-
-    subscribeToQuoteListSource(): void {
-        this.quotesListSubscription = this.quotesService.updatedQuotesListSource$.subscribe((quotes: Quote[]) => {
-            this.quotes = quotes;
         });
     }
 
@@ -94,6 +87,12 @@ export class QuotesCollectorComponent implements OnInit, OnDestroy {
         });
     }
 
+    updateQuotesList(quotes: Quote[]): void {
+        this.quotes = [...quotes].sort((quoteA: Quote, quoteB: Quote) => {
+            return quoteB.created_at.seconds - quoteA.created_at.seconds;
+        });
+    }
+
     storeNewQuote(params: QuoteParams): void {
         const newQuote = { ...params, owner: this.uid };
         this.quotesService.createNewQuote(newQuote).subscribe({
@@ -104,14 +103,6 @@ export class QuotesCollectorComponent implements OnInit, OnDestroy {
                 this.errorsService.handleError(err, Constants.ERROR_QUOTE_STORE);
             },
         });
-    }
-
-    updateQuotesList(quotes: Quote[]): void {
-        this.quotesService.updateQuotesList(
-            quotes.sort((quoteA: Quote, quoteB: Quote) => {
-                return quoteB.created_at.seconds - quoteA.created_at.seconds;
-            })
-        );
     }
 
     //
@@ -155,9 +146,6 @@ export class QuotesCollectorComponent implements OnInit, OnDestroy {
     ngOnDestroy(): void {
         if (this.quotesCollectionSubscription) {
             this.quotesCollectionSubscription.unsubscribe();
-        }
-        if (this.quotesListSubscription) {
-            this.quotesListSubscription.unsubscribe();
         }
         if (this.clipboardCopySubscription) {
             this.clipboardCopySubscription.unsubscribe();

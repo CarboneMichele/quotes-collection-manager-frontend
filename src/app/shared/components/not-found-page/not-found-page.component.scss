@@ -2,7 +2,7 @@
 @import "./../../../../assets/scss/colors";
 
 .qcm-notFoundPage {
-    @include bg-gradient-404;
+    @include bg-gradient-main;
     display: flex;
     flex-direction: column;
     align-items: center;

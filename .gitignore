@@ -47,3 +47,7 @@ Thumbs.db
 .runtimeconfig.json
 serviceAccount.json
 cypress.env.json
+
+
+# Cypress
+/cypress/videos

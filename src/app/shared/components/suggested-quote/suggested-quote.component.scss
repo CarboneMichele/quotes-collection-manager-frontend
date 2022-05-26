@@ -2,18 +2,22 @@
 @import "../../../../assets/scss/colors";
 
 :host {
+    display: block;
     width: 100%;
+    height: auto;
 }
 .qcm-suggestedQuote {
     @include bottom-box-shadow;
     @include bg-gradient-suggested-quote;
     animation: open 0.1s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
     width: 100%;
+    height: auto;
+    max-height: 200px;
     border-radius: 0 0 3px 3px;
-    transform: translateY(-130%);
+    transform: translateY(100%);
     padding: 24px 24px 0 24px;
     position: fixed;
-    top: 167px;
+    bottom: 0;
     left: 0;
     z-index: 8;
     animation-delay: 1s;
@@ -75,12 +79,6 @@
     }
 }
 
-@media screen and (min-width: 600px) {
-
-    .qcm-suggestedQuote {
-        top: 90px;
-    }
-}
 
 @keyframes open {
 
@@ -92,6 +90,6 @@
 @keyframes close {
 
     100% {
-        transform: translateY(-100%);
+        transform: translateY(100%);
     }
 }

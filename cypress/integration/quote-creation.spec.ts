@@ -16,6 +16,7 @@ describe('New quote creation', () => {
         cy.get('[data-cy="quote-submit-button"]').first().click();
 
         //check if the first quote in the list is the new one
+        cy.wait(200);
         cy.get('[data-cy="quote-content"]').first().should('have.text', quoteContent);
 
         //check if form is not showing

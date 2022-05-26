@@ -1,9 +1,9 @@
-import { ErrorsService } from './../../core/services/errors.service';
-import { HttpErrorResponse } from '@angular/common/http';
 import { Subscription } from 'rxjs';
+import { HttpErrorResponse } from '@angular/common/http';
 import { ActivatedRoute, Data, Router } from '@angular/router';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 
+import { ErrorsService } from './../../core/services/errors.service';
 import { ClipboardService } from './../../core/services/clipboard.service';
 import { UtilsService } from './../../core/services/utils.service';
 import { NotificationsService } from './../../core/services/notifications.service';
@@ -12,6 +12,7 @@ import { AuthService } from 'src/app/core/services/auth.service';
 
 import { QuoteParams } from './../../shared/models/quotes.model';
 import { Quote, SuggestedQuote } from 'src/app/shared/models/quotes.model';
+
 import { Constants } from 'src/app/core/constants/constants';
 
 @Component({

@@ -1,4 +1,5 @@
 import { Component, Input, EventEmitter, Output } from '@angular/core';
+
 import { QuoteParams, SuggestedQuote } from '../../models/quotes.model';
 
 @Component({

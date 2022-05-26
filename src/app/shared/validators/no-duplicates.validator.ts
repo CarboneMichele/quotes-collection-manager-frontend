@@ -1,5 +1,5 @@
-import { UtilsService } from './../../core/services/utils.service';
 import { ValidatorFn, AbstractControl } from '@angular/forms';
+import { UtilsService } from './../../core/services/utils.service';
 
 export function NoDuplicatesValidator(quotesContents: string[], utilsService: UtilsService): ValidatorFn {
     return (control: AbstractControl): Record<string, boolean> | null => {

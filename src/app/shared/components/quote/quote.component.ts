@@ -1,6 +1,8 @@
 import { Component, Input } from '@angular/core';
+
 import { UtilsService } from './../../../core/services/utils.service';
 import { ClipboardService } from './../../../core/services/clipboard.service';
+
 import { Quote } from '../../models/quotes.model';
 
 @Component({

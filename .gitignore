@@ -50,4 +50,4 @@ cypress.env.json
 
 
 # Cypress
-/cypress/videos
+cypress/videos
